@@ -2,10 +2,12 @@ const express = require("express")
 const app = express()
 const port = process.env.PORT || 3000
 const bodyParser = require("body-parser")
-
+const jwt = require('jsonwebtoken')
 const mongoose = process.env.MONGO || require('mongoose')
 mongoose.Promise = global.Promise
 const mongo = "mongodb://localhost/minhaserie-rest-devpleno"
+
+const jwtSecret = "abc123abc"
 
 //app.use(bodyParser({extended: true}))
 app.use(bodyParser.json())
@@ -21,10 +23,16 @@ app.post('/auth', async(req, res) =>{
   const userDb = await User.findOne({username: user.username})
   if(userDb){
     if(userDb.password === user.password){
-      res.send({
-        success: true, 
-        username: userDb.username,
-        token: ''
+      const payload = {
+        id: userDb._id, 
+        username: userDb.username, 
+        roles: userDb.roles
+      }
+      jwt.sign(payload, jwtSecret, (err, token) => {
+        res.send({
+          success: true, 
+          token: token
+        })
       })
     }else{
       res.send({success: false, message: "wrong credentials"})
