@@ -21,12 +21,16 @@ app.post('/auth', async(req, res) =>{
   const userDb = await User.findOne({username: user.username})
   if(userDb){
     if(userDb.password === user.password){
-      res.send('ok autentico e entrou')
+      res.send({
+        success: true, 
+        username: userDb.username,
+        token: ''
+      })
     }else{
-      res.send('wrong credentials')
+      res.send({success: false, message: "wrong credentials"})
     }
   }else{
-    res.send('wrong credentials')
+    res.send({success: false, message:'wrong credentials'})
   }
   //res.send(user)
 })
