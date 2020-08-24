@@ -21,8 +21,9 @@ router.post('/', async(req, res) => {
   //res.send(req.body)
 })
 
-router.get('/:id', (req,res) => {
-  res.send(req.params.id)
+router.get('/:id', async(req,res) => {
+  const serie = await Serie.findOne({_id: req.params.id})
+  res.send(serie)
 })
 
 router.delete('/:id', async(req,res) => {
