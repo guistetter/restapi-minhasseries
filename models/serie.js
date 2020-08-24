@@ -15,6 +15,6 @@ const SerieSchema = mongoose.Schema({
   }, 
   comments:[CommentSchema]
 })
-const Serie = mongoose.define('Serie', SerieSchema)
+const Serie = mongoose.model('Serie', SerieSchema)
 
 module.exports = Serie
