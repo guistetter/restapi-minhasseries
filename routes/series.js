@@ -1,12 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const Serie = require('../models/serie')
 
-const series = [
-  {name: "Friends"},
-  {name: "Breaking Bad"}
- ]
-
-router.get('/',(req,res) => {
+router.get('/', async(req,res) => {
+  const series = await Serie.find({})
   res.send(series)
 })
 
