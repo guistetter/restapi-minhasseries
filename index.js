@@ -12,11 +12,14 @@ const jwtSecret = "abc123abc"
 //app.use(bodyParser({extended: true}))
 app.use(bodyParser.json())
 
-const series = require('./routes/series')
 const User = require("./models/user")
+
+const series = require('./routes/series')
+const users = require('./routes/users')
 
 app.use('/series',series)
 //app.get('/series', (req, res) => res.send(series))
+app.use('/users', users)
 
 app.post('/auth', async(req, res) =>{
   const user = req.body
