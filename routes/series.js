@@ -7,6 +7,20 @@ router.get('/', async(req,res) => {
   res.send(series)
 })
 
+router.post('/', async(req, res) => {
+  const serie = new Serie(req.body)
+  try{
+    await serie.save()
+    res.send(serie)
+  }catch(e){
+    res.send({
+      success: false, 
+      errors: Object.keys(e.errors)
+    })
+  }
+  //res.send(req.body)
+})
+
 router.get('/:id',(req,res) => {
   res.send(req.params.id)
 })
