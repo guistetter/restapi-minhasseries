@@ -33,4 +33,18 @@ router.delete('/:id', async(req,res) => {
   })
 })
 
+router.put('/:id', async(req, res) => {
+  const serie = await Serie.findOne({ _id: req.params.id})
+  serie.name = req.body.name
+  serie.status = req.body.status
+  try{
+    await serie.save()
+    res.send(serie)
+  }catch(e){
+    res.send({
+      success: false, 
+      errors: Object.keys(e.errors)
+    })
+  }
+})
 module.exports = router
