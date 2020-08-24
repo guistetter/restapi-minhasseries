@@ -21,8 +21,15 @@ router.post('/', async(req, res) => {
   //res.send(req.body)
 })
 
-router.get('/:id',(req,res) => {
+router.get('/:id', (req,res) => {
   res.send(req.params.id)
+})
+
+router.delete('/:id', async(req,res) => {
+  await Serie.remove({_id: req.params.id})
+  res.send({
+    success: true
+  })
 })
 
 module.exports = router
