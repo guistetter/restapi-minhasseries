@@ -9,7 +9,9 @@
   <script src="./jquery.js"></script>
   <script>
     $(function(){
-      alert(1);
+      $.get('http://server1:3000/series?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNDQwZDE4OWRhNzg1MDcwZjcyMmJjOCIsInVzZXJuYW1lIjoiZ3VpIiwicm9sZXMiOlsicmVzdHJpdG8iLCJhZG1pbiJdLCJpYXQiOjE1OTgzNjE2MjF9.0AhJ9V1jm5_NTTPGUtbGjUtQ_iK8ZLwLvZjUPDuOep0',(data) =>{
+        console.log(data)
+      })
     })
   </script>
 </body>
