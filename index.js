@@ -1,6 +1,7 @@
-const express = require("express")
+const express = require("express") 
 const app = express()
 const port = process.env.PORT || 3000
+const cors = require("cors")
 const bodyParser = require("body-parser")
 const jwt = require('jsonwebtoken')
 const mongoose = process.env.MONGO || require('mongoose')
@@ -11,6 +12,15 @@ const jwtSecret = "abc123abc"
 
 //app.use(bodyParser({extended: true}))
 app.use(bodyParser.json())
+app.use(cors({
+ origin: (origin, callback) =>{
+    if(origin === 'http://server2:8080'){
+      callback(null, true)
+    }else{
+      callback(new Error('NOT allowed by cors'))
+    }
+  }
+}))
 
 const User = require("./models/user")
 
